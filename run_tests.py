@@ -1,8 +1,8 @@
 import unittest
 import sys
 
-from unit_tests.test_cinema import TestCinema
-from e2e_tests.test_booking_flow import TestBookingFlow
+from tests.unit_tests.test_cinema import TestCinema
+from tests.e2e_tests.test_booking_flow import TestBookingFlow
 
 def run_all_tests():
     # Create test suite

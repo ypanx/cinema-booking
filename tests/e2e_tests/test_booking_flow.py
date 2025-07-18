@@ -55,7 +55,7 @@ class TestBookingFlow(unittest.TestCase):
 
         output = self.held_output.getvalue()
         self.assertIn("Successfully reserved 2 The Dark Knight tickets", output)
-        self.assertIn("Booking id: GIC0001", output)
+        self.assertIn("Booking id: BK0001", output)
     
     @patch('builtins.input')
     def test_change_seats_once(self, mock_input):
@@ -65,7 +65,7 @@ class TestBookingFlow(unittest.TestCase):
 
         output = self.held_output.getvalue()
         self.assertIn("Successfully reserved 2 Oppenheimer tickets", output)
-        self.assertIn("Booking id: GIC0001", output)
+        self.assertIn("Booking id: BK0001", output)
         
         # Map should be shown twice, if there's a seat change
         self.assertGreaterEqual(output.count("S C R E E N"), 2)
@@ -87,7 +87,7 @@ class TestBookingFlow(unittest.TestCase):
 
         output = self.held_output.getvalue()
         self.assertIn("Successfully reserved 3 Dunkirk tickets", output)
-        self.assertIn("Booking id: GIC0001", output)
+        self.assertIn("Booking id: BK0001", output)
         
         # Map should be shown 4 times, for the seat changes.
         seating_maps = output.count("S C R E E N")
@@ -101,7 +101,7 @@ class TestBookingFlow(unittest.TestCase):
             "2",
             "",
             "2"
-            "GIC0001",
+            "0001",
             "",
             "3"
         ]
@@ -109,11 +109,11 @@ class TestBookingFlow(unittest.TestCase):
         main()
 
         output = self.held_output.getvalue()
-        self.assertIn("Booking id: GIC0001", output)
+        self.assertIn("Booking id: BK0001", output)
         self.assertIn("Selected seats:", output)
         
         # Check for booking confirmation
-        booking_confirms = output.count("Booking id: GIC0001")
+        booking_confirms = output.count("Booking id: BK0001")
         self.assertGreaterEqual(booking_confirms, 2)
     
     @patch('builtins.input')
@@ -134,7 +134,7 @@ class TestBookingFlow(unittest.TestCase):
 
         output = self.held_output.getvalue()
         self.assertIn("Invalid seating position", output)
-        self.assertIn("Booking id: GIC0001", output)
+        self.assertIn("Booking id: BK0001", output)
     
     @patch('builtins.input')
     def test_handling_fully_booked_cinema(self, mock_input):
@@ -142,7 +142,7 @@ class TestBookingFlow(unittest.TestCase):
 
         # Pre-book all seats
         seats = [(0,0), (0,1), (0,2), (1,0), (1,1), (1,2)]
-        cinema.book_seats(seats, "GIC0001")
+        cinema.book_seats(seats, "BK0001")
         
         # Try to book more seats
         mock_inputs = ["2", ""]
@@ -163,7 +163,7 @@ class TestBookingFlow(unittest.TestCase):
             "C20",
             "",
             "2",
-            "GIC0001",
+            "BK0001",
             "",
             "3"
         ]
@@ -171,7 +171,7 @@ class TestBookingFlow(unittest.TestCase):
         main()
 
         output = self.held_output.getvalue()
-        self.assertIn("Booking id: GIC0001", output)
+        self.assertIn("Booking id: BK0001", output)
 
         self.assertIn("S C R E E N", output)
         self.assertIn("10", output)
@@ -221,7 +221,7 @@ class TestBookingFlow(unittest.TestCase):
         mock_input.side_effect = [
             "Following 10 10",
             "2",
-            "GIC9999",
+            "BK9999",
             "",
             "3"
         ]
@@ -232,7 +232,7 @@ class TestBookingFlow(unittest.TestCase):
             pass
         
         output = self.held_output.getvalue()
-        self.assertIn("Booking id GIC9999 not found", output)
+        self.assertIn("Booking id BK9999 not found", output)
     
     @patch('builtins.input')
     def test_invalid_menu_option(self, mock_input):
@@ -274,10 +274,10 @@ class TestBookingFlow(unittest.TestCase):
             "3",
             "",
             "2",
-            "GIC0001",
+            "BK0001",
             "",
             "2",
-            "GIC0002",
+            "BK0002",
             "",
             "3"
         ]
@@ -290,8 +290,8 @@ class TestBookingFlow(unittest.TestCase):
         output = self.held_output.getvalue()
         
         # Verify 2 bookings were made
-        self.assertIn("Booking id: GIC0001 confirmed", output)
-        self.assertIn("Booking id: GIC0002 confirmed", output)
+        self.assertIn("Booking id: BK0001 confirmed", output)
+        self.assertIn("Booking id: BK0002 confirmed", output)
         
         # Check available seats were updated correctly, after 5 tickets are booked
         self.assertIn("(95 seats available)", output)
@@ -315,7 +315,7 @@ class TestBookingFlow(unittest.TestCase):
         
         # Should skip the booked middle seat and allocate adjacent seats
         self.assertIn("Successfully reserved 3", output)
-        self.assertIn("Booking id: GIC0002 confirmed", output)
+        self.assertIn("Booking id: BK0002 confirmed", output)
 
 if __name__ == '__main__':
     unittest.main() 

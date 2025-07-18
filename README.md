@@ -16,42 +16,84 @@ A command-line application for managing cinema ticket bookings, providing an int
 ```
 booking/
 ├── cinema.py         # Core Cinema class implementation
-├── main.py           # Main application and UI logic
+├── main.py           # Main CLI application and UI logic
+├── app.py            # Streamlit web UI application
+├── styles.css        # CSS styling for web interface
+├── requirements.txt  # Python dependencies
 ├── run_tests.py      # Test runner script
-├── unit_tests/       # Unit tests for Cinema class
-└── e2e_tests/        # End-to-end tests for booking flows
+├── screenshots/      # Application screenshots
+└── tests/            # Test suite
+    ├── unit_tests/   # Unit tests for Cinema class
+    └── e2e_tests/    # End-to-end tests for booking flows
 ```
 
 ## Requirements
 
 - Python 3.6 or higher
-- No external dependencies (uses only standard library modules)
+- Dependencies listed in requirements.txt
 
 ## Setup
 
-This application uses only Python standard library modules, so setup is straightforward.
-
-**Note**: A virtual environment is not required for this project as it has no external dependencies. However, if you plan to extend the application with features requiring additional packages, you may want to use a virtual environment:
-
+1. **Install Dependencies**:
 ```bash
-# Optional: Create and activate a virtual environment
+pip install -r requirements.txt
+```
+
+2. **Optional: Create Virtual Environment** (recommended):
+```bash
+# Create and activate a virtual environment
 python -m venv .venv
 
 # On Windows:
 .venv\Scripts\activate
 # On macOS/Linux:
 source .venv/bin/activate
+
+# Then install dependencies
+pip install -r requirements.txt
 ```
 
 ## Running the Application
 
-Launch the application with:
+### Web Interface (Streamlit) - Recommended
+
+Launch the modern web interface with:
+
+```bash
+streamlit run app.py
+```
+
+This will open your browser to `http://localhost:8501` with a full-featured web interface including:
+
+- **Interactive Setup**: Easy cinema configuration with form inputs
+- **Visual Seating Map**: Real-time seating chart with color-coded seats
+- **Modern UI**: Clean, responsive design with navigation sidebar
+- **Smart Booking**: Auto-allocation and custom position selection
+- **Booking Management**: View all bookings in a table format with search/filter
+- **Live Updates**: Real-time seat availability and booking confirmations
+
+### Screenshots
+
+**Cinema Setup**
+![Cinema Setup](screenshots/landing.png)
+
+**Main Dashboard**
+![Main Dashboard](screenshots/home.png)
+
+**Ticket Booking Interface**
+![Booking Interface](screenshots/booking.png)
+
+### Command Line Interface
+
+Launch the original CLI application with:
 
 ```bash
 python main.py
 ```
 
-### Cinema Setup
+### CLI Usage Instructions
+
+#### Cinema Setup
 
 When the application starts, you'll be prompted to define the movie and seating layout:
 ```
@@ -65,18 +107,18 @@ Constraints:
 - Maximum 26 rows (A-Z)
 - Maximum 50 seats per row
 
-### Main Menu
+#### Main Menu
 
 After setup, you'll have three options:
 ```
-Welcome to GIC Cinemas
+Welcome to Cinemas
 [1] Book tickets for Inception (80 seats available)
 [2] Check bookings
 [3] Exit
 Please enter your selection:
 ```
 
-### Booking Workflow
+#### Booking Workflow
 
 1. Enter the number of tickets you want to book.
 2. The system will suggest an optimal seating arrangement.
@@ -84,7 +126,7 @@ Please enter your selection:
    - Accept the suggested seats by pressing Enter
    - Enter a new starting position (e.g., "B5") to select different seats
 
-### Seating Chart Explanation
+#### Seating Chart Explanation
 
 ```
          S C R E E N
@@ -101,7 +143,7 @@ A .  .  o  o  o  o  .  .  .  .
 - Rows are labeled from A (front) to Z (back)
 - Seats are numbered from 1 to N (left to right)
 
-### Seat Allocation Rules
+#### Seat Allocation Rules
 
 1. **Default Allocation**:
    - Starts from the back row, middle seats
@@ -120,8 +162,8 @@ A .  .  o  o  o  o  .  .  .  .
 python run_tests.py
 
 # Run specific test modules
-python -m unittest unit_tests.test_cinema
-python -m unittest e2e_tests.test_booking_flow
+python -m unittest tests.unit_tests.test_cinema
+python -m unittest tests.e2e_tests.test_booking_flow
 ```
 
 ### Test Suites

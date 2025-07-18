@@ -171,7 +171,7 @@ def main():
     
     # Main menu loop
     while True:
-        print(f"\nWelcome to GIC Cinemas"
+        print(f"\nWelcome to Cinemas"
               f"\n[1] Book tickets for {cinema.title} ({cinema.available_seats} seats available)"
               f"\n[2] Check bookings"
               f"\n[3] Exit"
@@ -186,7 +186,7 @@ def main():
             check_bookings(cinema)
 
         elif selection == "3":
-            print("\nThank you for using GIC Cinemas system. Bye.")
+            print("\nThank you for using Cinemas system. Bye.")
             break
 
         else:
@@ -196,7 +196,7 @@ def main():
 if __name__ == "__main__":
     # cinema = Cinema("Friends", 8, 10)
     # seats = cinema.allocate_default_seats(4)
-    # cinema.book_seats(seats, "GIC0001")
+    # cinema.book_seats(seats, "0001")
     # print(cinema.seating_map[-1])
     main()
 

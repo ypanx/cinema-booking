@@ -31,7 +31,7 @@ class Cinema:
         Generate a unique booking id.
         """
         self.booking_counter += 1
-        booking_id = f"GIC{self.booking_counter:04d}"
+        booking_id = f"BK{self.booking_counter:04d}"
         self.logger.debug(f"Generated booking ID: {booking_id}")
         return booking_id
 
