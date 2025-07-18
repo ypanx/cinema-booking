@@ -4,7 +4,7 @@ A comprehensive cinema booking system featuring both a modern web interface and 
 
 > Semi-inspired by a take-home assignment some time ago. 
 
-Disclaimer: While the core business logic is traditionally written, the Streamlit UI app is mostly vibe-coded. 
+Disclaimer: While the core business logic is traditionally written, the Streamlit UI portion is mostly vibe-coded. 
 
 ## Features
 
