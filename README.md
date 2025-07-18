@@ -1,6 +1,8 @@
 # Cinema Booking System
 
-A command-line application for managing cinema ticket bookings, providing an intuitive interface for seat selection and booking management.
+A comprehensive cinema booking system featuring both a modern web interface and command-line application. Book tickets with smart seat allocation, interactive seating maps, and streamlined booking management - perfect for cinema operators and movie enthusiasts alike.
+
+> Semi-inspired by a take-home assignment some time ago. 
 
 ## Features
 
