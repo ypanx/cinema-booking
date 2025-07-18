@@ -1,5 +1,3 @@
-from typing import Optional
-
 from cinema import Cinema
 
 
@@ -150,6 +148,19 @@ def check_bookings(cinema):
 
         cinema.display_seating_map(booking_id)
 
+        print("\nPress C to cancel this booking or enter blank to proceed:")
+        is_cancel = input("> ")
+
+        if not is_cancel:
+            return
+
+        if is_cancel.lower() == "c":
+            cinema.cancel_booking(booking_id)
+            print("\nBooking cancelled:")
+            return
+
+        print(f"\nInvalid selection")
+
 
 def main():
     """
@@ -183,4 +194,10 @@ def main():
 
 
 if __name__ == "__main__":
+    # cinema = Cinema("Friends", 8, 10)
+    # seats = cinema.allocate_default_seats(4)
+    # cinema.book_seats(seats, "GIC0001")
+    # print(cinema.seating_map[-1])
     main()
+
+

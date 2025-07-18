@@ -209,6 +209,48 @@ class TestCinema(unittest.TestCase):
         # 3 seats from row 4, 5 seats from row 3
         self.assertEqual(rows.get(4), 3)
         self.assertEqual(rows.get(3), 5)
+
+    def test_allocate_from_overflow(self):
+        """
+        Test allocating seats with overflow to next row.
+        """
+        cinema = Cinema("Interstellar", 3, 3)
+
+        # request seats that overflow to next row
+        seats = cinema.allocate_seats_from_position(4, 0, 1)
+        self.assertEqual(len(seats), 4)
+
+        booking_id = "GIC0001"
+
+        cinema.book_seats(seats, booking_id)
+
+        self.assertEqual(cinema.seating_map, [['.', booking_id, booking_id], ['.', '.', '.'], ['.', booking_id, booking_id]])
+
+    def test_allocate_from_middle_even(self):
+        """
+        Test allocating seats with overflow to next row.
+        """
+        booking_id = "GIC0001"
+
+        cinema = Cinema("Interstellar", 1, 2)
+        seats = cinema.allocate_default_seats(1)
+
+        cinema.book_seats(seats, booking_id)
+        self.assertEqual([booking_id, "."], cinema.seating_map[0])
+
+    def test_allocate_from_middle_even_large(self):
+        """
+        Test allocating seats with overflow to next row.
+        """
+        booking_id = "GIC0001"
+
+        # More columns
+        cinema = Cinema("Interstellar", 1, 10)
+        seats = cinema.allocate_default_seats(4)
+        cinema.book_seats(seats, booking_id)
+
+        self.assertEqual(['.', '.', '.', booking_id, booking_id, booking_id, booking_id, '.', '.', '.'], cinema.seating_map[0])
+
     
     def test_allocate_from_position_with_unavailable_seats(self):
         """
@@ -316,6 +358,28 @@ class TestCinema(unittest.TestCase):
         cinema.book_seats([(0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2)], "GIC0001")
         self.assertIsNone(cinema.allocate_default_seats(1))
         self.assertIsNone(cinema.allocate_seats_from_position(1, 0, 0))
+
+    def test_cancel_booking(self):
+        """
+        Test allocating seats with overflow to next row.
+        """
+        booking_id = "GIC0001"
+
+        # More columns
+        cinema = Cinema("Interstellar", 2, 5)
+        seats = cinema.allocate_default_seats(4)
+        cinema.book_seats(seats, booking_id)
+
+        self.assertEqual([['.', '.', '.', '.', '.'], ['.', 'GIC0001', 'GIC0001', 'GIC0001', 'GIC0001']], cinema.seating_map)
+        self.assertEqual([(1, 2), (1, 3), (1, 1), (1, 4)], cinema.bookings[booking_id])
+        self.assertEqual(6, cinema.available_seats)
+
+        cinema.cancel_booking(booking_id)
+
+        self.assertEqual([['.', '.', '.', '.', '.'], ['.', '.', '.', '.', '.']], cinema.seating_map)
+        self.assertEqual(None, cinema.bookings.get(booking_id))
+        self.assertEqual(10, cinema.available_seats)
+
 
 if __name__ == "__main__":
     unittest.main() 
