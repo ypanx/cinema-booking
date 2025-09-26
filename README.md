@@ -1,26 +1,40 @@
 # Cinema Booking System
 
-A comprehensive cinema booking system featuring both a modern web interface and command-line application. Book tickets with smart seat allocation, interactive seating maps, and streamlined booking management - perfect for cinema operators and movie enthusiasts alike.
+A modern cinema ticket booking system available as both a command-line application and a web interface, providing intuitive seat selection and comprehensive booking management.
 
-> Semi-inspired by a take-home assignment some time ago. 
+## Quick Start
 
-Disclaimer: While the core business logic is traditionally written, the Streamlit UI portion is mostly vibe-coded. 
+```bash
+# Clone the repository
+git clone <repository-url>
+cd cinema_booking
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the web interface
+streamlit run app.py
+
+# Or run the CLI version
+python main.py
+```
 
 ## Features
 
-1. **Cinema Configuration**: Set up a movie screening with customizable seating layouts.
-2. **Smart Seat Allocation**: Automatic seat selection based on optimal viewing positions.
-3. **Custom Seat Selection**: Override default allocations by selecting specific starting positions.
-4. **Multiple Seat Changes**: Change seat selections multiple times before confirming a booking.
-5. **Booking Management**: View booking details using unique booking ids.
-6. **Visualization**: Clear visual representation of the seating chart with screen orientation.
+1. **Cinema Configuration**: Set up a movie screening with customizable seating layouts (up to 26 rows and 50 seats per row)
+2. **Smart Seat Allocation**: Automatic seat selection based on optimal viewing positions
+3. **Custom Seat Selection**: Override default allocations by selecting specific starting positions
+4. **Multiple Seat Changes**: Change seat selections multiple times before confirming a booking
+5. **Booking Management**: View and cancel bookings using unique booking IDs (format: BK0001, BK0002, etc.)
+6. **Visualization**: Clear visual representation of the seating chart with screen orientation
+7. **Dual Interface**: Available as both modern web UI (Streamlit) and classic command-line interface
 
 ## Project Structure
 
 ```
-booking/
+cinema_booking/
 ├── cinema.py         # Core Cinema class implementation
-├── main.py           # Main CLI application and UI logic
+├── main.py           # Command-line interface application
 ├── app.py            # Streamlit web UI application
 ├── styles.css        # CSS styling for web interface
 ├── requirements.txt  # Python dependencies
@@ -30,6 +44,13 @@ booking/
     ├── unit_tests/   # Unit tests for Cinema class
     └── e2e_tests/    # End-to-end tests for booking flows
 ```
+
+## Technologies
+
+- **Python 3.6+**: Core programming language
+- **Streamlit**: Modern web interface framework
+- **Pandas**: Data manipulation for booking management
+- **unittest**: Testing framework
 
 ## Requirements
 
@@ -77,6 +98,8 @@ This will open your browser to `http://localhost:8501` with a full-featured web 
 - **Live Updates**: Real-time seat availability and booking confirmations
 
 ### Screenshots
+
+Experience the modern, cinema-themed interface with dark mode design and intuitive controls:
 
 **Cinema Setup**
 ![Cinema Setup](screenshots/landing.png)
@@ -172,5 +195,16 @@ python -m unittest tests.e2e_tests.test_booking_flow
 
 ### Test Suites
 
-1. **Unit Tests**: Focus on the Cinema class functionality:
-2. **End-to-End Tests**: Simulate real user interactions:
+1. **Unit Tests**: Focus on the Cinema class functionality
+   - Seat allocation algorithms
+   - Booking ID generation (BK prefix format)
+   - Seat availability checking
+   - Row/seat conversion methods
+   - Edge cases and error handling
+
+2. **End-to-End Tests**: Simulate real user interactions
+   - Complete booking workflows
+   - Cinema setup validation
+   - Multiple booking scenarios
+   - Booking cancellation flows
+   - Invalid input handling
